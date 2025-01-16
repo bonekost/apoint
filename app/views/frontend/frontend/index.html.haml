@@ -1,0 +1,14 @@
+.frontend-home.min-h-screen.bg-gray-50.flex.flex-col.items-center
+  .flex.flex-col.md:flex-row.gap-6.w-full.max-w-6xl.mx-auto.p-6
+    .w-full.bg-white.rounded-lg.shadow-lg.p-6
+      - @current_month = Date.today + 1.month
+      = render "frontend/frontend/calendar"
+    
+    / Available Times for Selected Date
+    .w-full.bg-white.rounded-lg.shadow-lg.p-6
+      .mt-8.md:mt-0
+        %h3.text-xl.font-bold.text-gray-800.mb-4 Available Times for #{@current_month.strftime("%B %d, %Y")}
+        .grid.grid-cols-2.md:grid-cols-4.text-center.text-lg.font-medium.text-gray-800.gap-4
+          - available_times = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"]
+          - available_times.each do |time|
+            %div.py-2.px-4.border.border-gray-300.rounded-md.hover:bg-blue-100.cursor-pointer= time

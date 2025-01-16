@@ -1,0 +1,30 @@
+.text-center.mb-6
+  %h2{ class: "text-2xl font-bold text-gray-800" }= @current_month.strftime("%B %Y")
+  .mt-2
+    - if @current_month >= Date.today.beginning_of_month
+      %button{ class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 mr-2", onclick: "window.location.href='?month=' + (#{@current_month.month} - 1)" } Previous Month
+    %button{ class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600", onclick: "window.location.href='?month=' + (#{@current_month.month} + 1)" } Next Month
+
+/ Weekdays
+.grid.grid-cols-7.text-center.text-lg.font-semibold.text-gray-600.border-b.border-gray-300.pb-2
+  - ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].each do |day|
+    %div= day
+
+/ Dates
+.grid.grid-cols-7.text-center.text-lg.font-medium.text-gray-800.mt-4.gap-4
+  - first_day_of_month = @current_month.beginning_of_month
+  - last_day_of_month = @current_month.end_of_month
+  - first_weekday = first_day_of_month.wday
+  - total_days = (first_day_of_month..last_day_of_month).to_a
+
+  / Blank cells for previous month
+  - first_weekday.times do
+    %div{ class: "h-12" }
+
+  / Days of the current month
+  - total_days.each do |day|
+    %div{ class: "h-12 flex items-center justify-center border border-gray-300 rounded-md cursor-pointer hover:bg-blue-100", onclick: "window.location.href='?day=' + #{day}" }= day.day
+
+  / Blank cells for next month
+  - (7 - (first_weekday + total_days.size) % 7).times do
+    %div{ class: "h-12" }
