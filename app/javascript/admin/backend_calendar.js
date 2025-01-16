@@ -2,6 +2,10 @@ import Calendar from "@toast-ui/calendar";
 
 const calendar = new Calendar('#calendar', {
   defaultView: 'week',
+  week: {
+    startDayOfWeek: 1,
+    taskView: false,
+  },
   template: {
     time(event) {
       const { start, end, title } = event;

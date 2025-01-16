@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
-  }
+  devise_for :users
 
   # Admin namespace
   namespace :admin do
+    root 'dashboard#index'
     get '/', to: 'dashboard#index', as: :dashboard
     resources :users
   end
