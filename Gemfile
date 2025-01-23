@@ -24,8 +24,6 @@ gem "thruster", require: false
 gem 'haml-rails'
 gem 'html2haml'
 
-gem 'devise'
-
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
